@@ -565,7 +565,7 @@ FILE *opend64(const char *fname, bam_s *bam_p)
 // Trims the file name to something that works with HTTP
 char *trim (const char *input)
 {
-    static char output[17];
+    static char output[16 * 6 + 1];
     int         i;
 
     strcpy(output, input);
