@@ -23,10 +23,28 @@
 
 #pragma pack(1)
 
-// Adapt these defines to fit your system
+// Adapt these defines to fit your system ---------------------------------
+// Command to invoke to display BASIC programs
 #define BASTEXT "/home/peter/bin/bastext -ia %s 2> /dev/null"
+
+// Where to put temporary files
 #define TMPNAME "/tmp/d64-XXXXXX"
+
+// How large can a file be?
 #define MAXSIZE 664
+
+// VIRTUAL - Use a virtual tree:
+//  basedir/path/                     for action=list
+//  basedir/path/filenum/type/name    for action=extract
+// These need to be mapped via htaccess rewrites. "name" is not used.
+// If not defined, regular CGI links will be used
+#define VIRTUAL
+
+#ifndef VIRTUAL
+# define SELF "d64.cgi"
+#endif
+
+// You should not need to change anything below here ----------------------
 
 // Structure for BAM (18,0)
 struct bam_s
@@ -225,6 +243,26 @@ FILE *opend64(const char *fname, bam_s *bam_p)
     return f;
 }
 
+#ifdef VIRTUAL
+// Trims the file name to something that works with HTTP
+char *trim (const char *input)
+{
+    static char output[17];
+    int         i;
+
+    strcpy(output, input);
+    while (' ' == output[strlen(output) - 1])
+    	output[strlen(output) - 1] = 0;
+
+    for (i = 0; i <= 17; i ++)
+        if (' ' == output[i])
+            output[i] = '_';
+        else if (0 == output[i])
+            return output;
+    return output;
+}
+#endif
+
 // Displays directory of a D64 file
 void directory(const char *fname)
 {
@@ -232,6 +270,9 @@ void directory(const char *fname)
     dirblock_u  dirblock;
     int         sector, dirnr, i, ftype;
     const char  *filetypes[] = { "DEL", "SEQ", "PRG", "USR", "REL" };
+#ifdef VIRTUAL
+    char        *p;
+#endif
     string      tmp, tmp2;
     bam_s       bam;
 
@@ -250,7 +291,7 @@ void directory(const char *fname)
     tmp = petscii(bam.diskname, 16, true);
     tmp2= petscii(bam.id,       5,  true);
     printf(" <tr><th><th align=left bgcolor=\"#cccccc\">%s"
-           "<th align=left bgcolor=\"#cccccc\">%s",
+           "<th align=left bgcolor=\"#cccccc\">%s\n",
            tmp.c_str(), tmp2.c_str());
 
     // List files
@@ -281,15 +322,27 @@ void directory(const char *fname)
                     // Properly closed SEQ or PRG
 
                     dirnr = sector * 8 + i;
-                    printf("<a href=\"d64.cgi?path=%s&amp;action=extract"
+#ifdef VIRTUAL
+                    p = trim(tmp.c_str());
+                    printf("<a href=\"%d/r/%s.%c\">%s</a>"
+                           "<td align=left>"
+                           "<a href=\"%d/%c/%s\">%s%s</a>\n",
+                           dirnr, p, tolower(filetypes[ftype & 0xf][0]),
+                           tmp.c_str(),
+                           dirnr, tolower(filetypes[ftype & 0xf][0]),
+                           p, filetypes[ftype & 0xf],
+                           ((ftype & 0xC0) == 0xC0 ? "<" : ""));
+#else
+                    printf("<a href=\"" SELF "?path=%s&amp;action=extract"
                            "&amp;filenum=%d&amp;type=r\">%s</a>"
                            "<td align=left>"
-                           "<a href=\"d64.cgi?path=%s&amp;action=extract"
+                           "<a href=\"" SELF "?path=%s&amp;action=extract"
                            "&amp;filenum=%d&amp;type=%c\">%s%s</a>\n",
                            fname, dirnr, tmp.c_str(),
                            fname, dirnr, tolower(filetypes[ftype & 0xf][0]),
                            filetypes[ftype & 0xf],
                            ((ftype & 0xC0) == 0xC0 ? "<" : ""));
+#endif
                 }
                 else
                 {
@@ -329,7 +382,11 @@ void directory(const char *fname)
     puts("You can download files by their filenames, or see them "
          "in your browser by their filetypes.");
     puts("<hr noshade>");
+#ifdef VIRTUAL
+    puts("<a href=\"../\">Return to the index</a>");
+#else
     puts("<a href=\"./\">Return to the index</a>");
+#endif
     puts("</body></html>");
 }
 
@@ -358,7 +415,6 @@ void extract(const char *fname, int filenum, const char action)
     // Check parameters for sanity
     if (action != 'r' && action != 's' && action != 'p')
     {
-        printf("ACTION=%c(%d)\n", action, (int) action);
         disperror("I don't know how to extract that type");
     }
 
