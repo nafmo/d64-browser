@@ -610,8 +610,8 @@ void directory(const char *fname)
     puts("<body bgcolor=\"#ffffff\" link=\"#1e90ff\" vlink=\"#000080\">");
     printf("<h1 align=center>%s</h1>\n", fname);
     puts("<table align=center border=0>");
-    tmp = petscii(bam.diskname, 16, true);
-    tmp2= petscii(bam.id,       5,  true);
+    tmp = utf8petscii(bam.diskname, 16, true);
+    tmp2= utf8petscii(bam.id,       5,  true);
     printf(" <tr><th><th align=left bgcolor=\"#cccccc\">%s"
            "<th align=left bgcolor=\"#cccccc\">%s\n",
            tmp.c_str(), tmp2.c_str());
@@ -645,7 +645,7 @@ void directory(const char *fname)
 
                     dirnr = sector * 8 + i;
 #ifdef VIRTUAL
-                    ascii = petscii(dirblock.file[i].name, 16, true);
+                    ascii = utf8petscii(dirblock.file[i].name, 16, true);
                     p = trim(ascii.c_str());
                     printf("<a href=\"%d/r/%s.%c\">%s</a>"
                            "<td align=left>"
