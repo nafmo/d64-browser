@@ -532,7 +532,7 @@ int query(const char *param, char *dest, int n)
 // Display error message
 void disperror(const char *text)
 {
-    puts("Content-Type: text/html\n");
+    puts("Content-Type: text/html;charset=us-ascii\n");
     puts("<html><head><title>Error</title></head><body>");
     puts(text);
     puts("</body></html>");
@@ -658,7 +658,7 @@ void directory(const char *fname)
                     if ((ftype & 0xf) == 1)
                     {
                         // Provide UTF-8 alternative for SEQ
-                        printf(" <a href=\"%d/u/%s\">\xE2\x92\xB0</a>",
+                        printf(" <a href=\"%d/u/%s\">(utf-8)</a>",
                                dirnr, p);
                     }
                     putchar('\n');
@@ -677,7 +677,7 @@ void directory(const char *fname)
                         // Provide UTF-8 alternative for SEQ
                         printf(" <a href="\"" SELF "?path=%s&amp;"
                                "action=extract&amp;filenum=%d&amp;"
-                               "type=u\">\xE2\x92\xB0</a>",
+                               "type=u\">(utf-8)</a>",
                                fname, dirnr);
                     }
                     putchar('\n');
@@ -720,7 +720,7 @@ void directory(const char *fname)
     puts("</table>");
     puts("You can download files by their filenames, or see them "
          "in your browser by their filetypes."
-         "Select the \xE2\x92\xB0 link to get a UTF-8 representation "
+         "Select the (utf-8) link to get a UTF-8 representation "
          "of sequential (text) files.");
     puts("<hr noshade>");
 #ifdef VIRTUAL
@@ -791,7 +791,7 @@ void extract(const char *fname, int filenum, const char action)
             break;
 
         case 's':
-            puts("Content-type: text/plain\n");
+            puts("Content-type: text/plain;charset=iso-8859-1\n");
             break;
 
         case 'u':
@@ -810,7 +810,7 @@ void extract(const char *fname, int filenum, const char action)
 
             // Reassing to a FILE*
             out = fdopen(fh, "w");
-            puts("Content-type: text/plain\n");
+            puts("Content-type: text/plain;charset=iso-8859-1\n");
             break;
     }
 
