@@ -20,6 +20,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <string>
+#include <wchar.h>
 
 #pragma pack(1)
 
@@ -84,6 +85,323 @@ union dirblock_u
         char    t, s;
     } link;
 };
+
+// Unicode PETSCII table
+wchar_t petsciiunicode[256] =
+{
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // WHITE COLOR SWITCH (CUS)
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // DISABLE CHARACTER SET SWITCHING (CUS)
+    0xFFFD, // ENABLE CHARACTER SET SWITCHING (CUS)
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0x000D, // CARRIAGE RETURN
+    0x000E, // SHIFT OUT
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // CURSOR DOWN (CUS)
+    0xFFFD, // REVERSE VIDEO ON (CUS)
+    0xFFFD, // HOME (CUS)
+    0x007F, // DELETE
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // RED COLOR SWITCH (CUS)
+    0xFFFD, // CURSOR RIGHT (CUS)
+    0xFFFD, // GREEN COLOR SWITCH (CUS)
+    0xFFFD, // BLUE COLOR SWITCH (CUS)
+    0x0020, // SPACE
+    0x0021, // EXCLAMATION MARK
+    0x0022, // QUOTATION MARK
+    0x0023, // NUMBER SIGN
+    0x0024, // DOLLAR SIGN
+    0x0025, // PERCENT SIGN
+    0x0026, // AMPERSAND
+    0x0027, // APOSTROPHE
+    0x0028, // LEFT PARENTHESIS
+    0x0029, // RIGHT PARENTHESIS
+    0x002A, // ASTERISK
+    0x002B, // PLUS SIGN
+    0x002C, // COMMA
+    0x002D, // HYPHEN-MINUS
+    0x002E, // FULL STOP
+    0x002F, // SOLIDUS
+    0x0030, // DIGIT ZERO
+    0x0031, // DIGIT ONE
+    0x0032, // DIGIT TWO
+    0x0033, // DIGIT THREE
+    0x0034, // DIGIT FOUR
+    0x0035, // DIGIT FIVE
+    0x0036, // DIGIT SIX
+    0x0037, // DIGIT SEVEN
+    0x0038, // DIGIT EIGHT
+    0x0039, // DIGIT NINE
+    0x003A, // COLON
+    0x003B, // SEMICOLON
+    0x003C, // LESS-THAN SIGN
+    0x003D, // EQUALS SIGN
+    0x003E, // GREATER-THAN SIGN
+    0x003F, // QUESTION MARK
+    0x0040, // COMMERCIAL AT
+    0x0061, // LATIN SMALL LETTER A
+    0x0062, // LATIN SMALL LETTER B
+    0x0063, // LATIN SMALL LETTER C
+    0x0064, // LATIN SMALL LETTER D
+    0x0065, // LATIN SMALL LETTER E
+    0x0066, // LATIN SMALL LETTER F
+    0x0067, // LATIN SMALL LETTER G
+    0x0068, // LATIN SMALL LETTER H
+    0x0069, // LATIN SMALL LETTER I
+    0x006A, // LATIN SMALL LETTER J
+    0x006B, // LATIN SMALL LETTER K
+    0x006C, // LATIN SMALL LETTER L
+    0x006D, // LATIN SMALL LETTER M
+    0x006E, // LATIN SMALL LETTER N
+    0x006F, // LATIN SMALL LETTER O
+    0x0070, // LATIN SMALL LETTER P
+    0x0071, // LATIN SMALL LETTER Q
+    0x0072, // LATIN SMALL LETTER R
+    0x0073, // LATIN SMALL LETTER S
+    0x0074, // LATIN SMALL LETTER T
+    0x0075, // LATIN SMALL LETTER U
+    0x0076, // LATIN SMALL LETTER V
+    0x0077, // LATIN SMALL LETTER W
+    0x0078, // LATIN SMALL LETTER X
+    0x0079, // LATIN SMALL LETTER Y
+    0x007A, // LATIN SMALL LETTER Z
+    0x00E4, // LATIN SMALL LETTER A WITH DIAERESIS
+    0x00F6, // LATIN SMALL LETTER O WITH DIAERESIS
+    0x00E5, // LATIN SMALL LETTER A WITH RING ABOVE
+    0x2191, // UPWARDS ARROW
+    0x2190, // LEFTWARDS ARROW
+    0x2501, // BOX DRAWINGS LIGHT HORIZONTAL
+    0x0041, // LATIN CAPITAL LETTER A
+    0x0042, // LATIN CAPITAL LETTER B
+    0x0043, // LATIN CAPITAL LETTER C
+    0x0044, // LATIN CAPITAL LETTER D
+    0x0045, // LATIN CAPITAL LETTER E
+    0x0046, // LATIN CAPITAL LETTER F
+    0x0047, // LATIN CAPITAL LETTER G
+    0x0048, // LATIN CAPITAL LETTER H
+    0x0049, // LATIN CAPITAL LETTER I
+    0x004A, // LATIN CAPITAL LETTER J
+    0x004B, // LATIN CAPITAL LETTER K
+    0x004C, // LATIN CAPITAL LETTER L
+    0x004D, // LATIN CAPITAL LETTER M
+    0x004E, // LATIN CAPITAL LETTER N
+    0x004F, // LATIN CAPITAL LETTER O
+    0x0050, // LATIN CAPITAL LETTER P
+    0x0051, // LATIN CAPITAL LETTER Q
+    0x0052, // LATIN CAPITAL LETTER R
+    0x0053, // LATIN CAPITAL LETTER S
+    0x0054, // LATIN CAPITAL LETTER T
+    0x0055, // LATIN CAPITAL LETTER U
+    0x0056, // LATIN CAPITAL LETTER V
+    0x0057, // LATIN CAPITAL LETTER W
+    0x0058, // LATIN CAPITAL LETTER X
+    0x0059, // LATIN CAPITAL LETTER Y
+    0x005A, // LATIN CAPITAL LETTER Z
+    0x00C4, // LATIN CAPITAL LETTER A WITH DIAERESIS
+    0x00C6, // LATIN CAPITAL LETTER O WITH DIAERESIS
+    0x00C5, // LATIN CAPITAL LETTER A WITH RING ABOVE
+    0x2592, // MEDIUM SHADE
+    0x2592, // MEDIUM SHADE SLASHED (CUS) **
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // ORANGE COLOR SWITCH (CUS)
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // FUNCTION KEY 1 (CUS)
+    0xFFFD, // FUNCTION KEY 3 (CUS)
+    0xFFFD, // FUNCTION KEY 5 (CUS)
+    0xFFFD, // FUNCTION KEY 7 (CUS)
+    0xFFFD, // FUNCTION KEY 2 (CUS)
+    0xFFFD, // FUNCTION KEY 4 (CUS)
+    0xFFFD, // FUNCTION KEY 6 (CUS)
+    0xFFFD, // FUNCTION KEY 8 (CUS)
+    0x0020, // SPACE
+    0x000F, // SHIFT IN
+    0xFFFD, // undefined in PETSCII-sv
+    0xFFFD, // BLACK COLOR SWITCH (CUS)
+    0xFFFD, // CURSOR UP (CUS)
+    0xFFFD, // REVERSE VIDEO OFF (CUS)
+    0x000C, // FORM FEED
+    0xFFFD, // INSERT (CUS)
+    0xFFFD, // BROWN COLOR SWITCH (CUS)
+    0xFFFD, // LIGHT RED COLOR SWITCH (CUS)
+    0xFFFD, // GRAY 1 COLOR SWITCH (CUS)
+    0xFFFD, // GRAY 2 COLOR SWITCH (CUS)
+    0xFFFD, // LIGHT GREEN COLOR SWITCH (CUS)
+    0xFFFD, // LIGHT BLUE COLOR SWITCH (CUS)
+    0xFFFD, // GRAY 3 COLOR SWITCH (CUS)
+    0xFFFD, // PURPLE COLOR SWITCH (CUS)
+    0xFFFD, // CURSOR LEFT (CUS)
+    0xFFFD, // YELLOW COLOR SWITCH (CUS)
+    0xFFFD, // CYAN COLOR SWITCH (CUS)
+    0x0020, // SPACE
+    0x258C, // LEFT HALF BLOCK
+    0x2584, // LOWER HALF BLOCK
+    0x2594, // UPPER ONE EIGHTH BLOCK
+    0x2581, // LOWER ONE EIGHTH BLOCK
+    0x258F, // LEFT ONE EIGHTH BLOCK
+    0x2592, // MEDIUM SHADE
+    0x2595, // RIGHT ONE EIGHTH BLOCK
+    0x2584, // LOWER HALF BLOCK MEDIUM SHADE (CUS) **
+    0x25E4, // BLACK UPPER LEFT TRIANGLE
+    0x2590, // RIGHT ONE QUARTER BLOCK (CUS) **
+    0x251C, // BOX DRAWINGS LIGHT VERTICAL AND RIGHT
+    0x00A0, // BLACK SMALL SQUARE LOWER RIGHT (CUS) **
+    0x2514, // BOX DRAWINGS LIGHT UP AND RIGHT
+    0x2510, // BOX DRAWINGS LIGHT DOWN AND LEFT
+    0x2582, // LOWER ONE QUARTER BLOCK
+    0x250C, // BOX DRAWINGS LIGHT DOWN AND RIGHT
+    0x2534, // BOX DRAWINGS LIGHT UP AND HORIZONTAL
+    0x252C, // BOX DRAWINGS LIGHT DOWN AND HORIZONTAL
+    0x2524, // BOX DRAWINGS LIGHT VERTICAL AND LEFT
+    0x258E, // LEFT ONE QUARTER BLOCK
+    0x258D, // LEFT THREE EIGTHS BLOCK
+    0x2590, // RIGHT THREE EIGHTHS BLOCK (CUS) **
+    0x2580, // UPPER ONE QUARTER BLOCK (CUS) **
+    0x2580, // UPPER THREE EIGHTS BLOCK (CUS) **
+    0x2583, // LOWER THREE EIGHTHS BLOCK
+    0x2713, // CHECK MARK
+    0x00A0, // BLACK SMALL SQUARE LOWER LEFT (CUS) **
+    0x00A0, // BLACK SMALL SQUARE UPPER RIGHT (CUS) **
+    0x2518, // BOX DRAWINGS LIGHT UP AND LEFT
+    0x00A0, // BLACK SMALL SQUARE UPPER LEFT (CUS) **
+    0x00A0, // TWO SMALL BLACK SQUARES DIAGONAL LEFT TO RIGHT (CUS) **
+    0x2501, // BOX DRAWINGS LIGHT HORIZONTAL
+    0x0041, // LATIN CAPITAL LETTER A
+    0x0042, // LATIN CAPITAL LETTER B
+    0x0043, // LATIN CAPITAL LETTER C
+    0x0044, // LATIN CAPITAL LETTER D
+    0x0045, // LATIN CAPITAL LETTER E
+    0x0046, // LATIN CAPITAL LETTER F
+    0x0047, // LATIN CAPITAL LETTER G
+    0x0048, // LATIN CAPITAL LETTER H
+    0x0049, // LATIN CAPITAL LETTER I
+    0x004A, // LATIN CAPITAL LETTER J
+    0x004B, // LATIN CAPITAL LETTER K
+    0x004C, // LATIN CAPITAL LETTER L
+    0x004D, // LATIN CAPITAL LETTER M
+    0x004E, // LATIN CAPITAL LETTER N
+    0x004F, // LATIN CAPITAL LETTER O
+    0x0050, // LATIN CAPITAL LETTER P
+    0x0051, // LATIN CAPITAL LETTER Q
+    0x0052, // LATIN CAPITAL LETTER R
+    0x0053, // LATIN CAPITAL LETTER S
+    0x0054, // LATIN CAPITAL LETTER T
+    0x0055, // LATIN CAPITAL LETTER U
+    0x0056, // LATIN CAPITAL LETTER V
+    0x0057, // LATIN CAPITAL LETTER W
+    0x0058, // LATIN CAPITAL LETTER X
+    0x0059, // LATIN CAPITAL LETTER Y
+    0x005A, // LATIN CAPITAL LETTER Z
+    0x00C4, // LATIN CAPITAL LETTER A WITH DIAERESIS
+    0x00C6, // LATIN CAPITAL LETTER O WITH DIAERESIS
+    0x00C5, // LATIN CAPITAL LETTER A WITH RING ABOVE
+    0x2592, // MEDIUM SHADE
+    0x2592, // MEDIUM SHADE SLASHED (CUS) **
+    0x0020, // SPACE
+    0x258C, // LEFT HALF BLOCK
+    0x2584, // LOWER HALF BLOCK
+    0x2594, // UPPER ONE EIGHTH BLOCK
+    0x2581, // LOWER ONE EIGHTH BLOCK
+    0x258F, // LEFT ONE EIGHTH BLOCK
+    0x2592, // MEDIUM SHADE
+    0x2595, // RIGHT ONE EIGHTH BLOCK
+    0x2584, // LOWER HALF BLOCK MEDIUM SHADE (CUS) **
+    0x25E4, // BLACK UPPER LEFT TRIANGLE
+    0x2590, // RIGHT ONE QUARTER BLOCK (CUS) **
+    0x251C, // BOX DRAWINGS LIGHT VERTICAL AND RIGHT
+    0x00A0, // BLACK SMALL SQUARE LOWER RIGHT (CUS) **
+    0x2514, // BOX DRAWINGS LIGHT UP AND RIGHT
+    0x2510, // BOX DRAWINGS LIGHT DOWN AND LEFT
+    0x2582, // LOWER ONE QUARTER BLOCK
+    0x250C, // BOX DRAWINGS LIGHT DOWN AND RIGHT
+    0x2534, // BOX DRAWINGS LIGHT UP AND HORIZONTAL
+    0x252C, // BOX DRAWINGS LIGHT DOWN AND HORIZONTAL
+    0x2524, // BOX DRAWINGS LIGHT VERTICAL AND LEFT
+    0x258E, // LEFT ONE QUARTER BLOCK
+    0x258D, // LEFT THREE EIGTHS BLOCK
+    0x2590, // RIGHT THREE EIGHTHS BLOCK (CUS) **
+    0x2580, // UPPER ONE QUARTER BLOCK (CUS) **
+    0x2580, // UPPER THREE EIGHTS BLOCK (CUS) **
+    0x2583, // LOWER THREE EIGHTHS BLOCK
+    0x2713, // CHECK MARK
+    0x00A0, // BLACK SMALL SQUARE LOWER LEFT (CUS)
+    0x00A0, // BLACK SMALL SQUARE UPPER RIGHT (CUS)
+    0x2518, // BOX DRAWINGS LIGHT UP AND LEFT
+    0x00A0, // BLACK SMALL SQUARE UPPER LEFT (CUS)
+    0x2592  // MEDIUM SHADE
+};
+
+// Convert a string from Swedish PETSCII to UTF-8
+string utf8petscii(char *input, int n, bool esc)
+{
+    string o;
+    unsigned char *p = (unsigned char *) input;
+
+    while (*p && n)
+    {
+        wchar_t ch = petsciiunicode[*p];
+        if (ch <= 0x7F)
+        {
+            if (esc)
+            {
+                switch (ch)
+                {
+                    case '&':
+                        o += "&amp;";
+                        break;
+
+                    case '<':
+                        o += "&lt;";
+                        break;
+
+                    case '>':
+                        o += "&gt;";
+                        break;
+
+                    default:
+                        o += char(ch);
+                        break;
+                }
+            }
+            else
+            {
+                o += char(ch);
+            }
+        }
+        else if (ch <= 0x7FF)
+        {
+            o += char(0xC0 | ((ch >> 6) & 0x1F));
+            o += char(0x80 | ( ch       & 0x3F));
+        }
+        else if (ch <= 0xFFFF)
+        {
+            o += char(0xE0 | ((ch >> 12) & 0x0F));
+            o += char(0x80 | ((ch >>  6) & 0x3F));
+            o += char(0x80 | ( ch        & 0x3F));
+        }
+
+        n --;
+        p ++;
+    }
+    *p = 0;
+    return o;
+}
 
 // Convert a string from Swedish PETSCII to a rudimentry ASCII representation
 // (kills most special characters and always uses mixed case)
@@ -252,7 +570,7 @@ char *trim (const char *input)
 
     strcpy(output, input);
     while (' ' == output[strlen(output) - 1])
-    	output[strlen(output) - 1] = 0;
+        output[strlen(output) - 1] = 0;
 
     for (i = 0; i <= 17; i ++)
         if (' ' == output[i])
@@ -273,19 +591,21 @@ void directory(const char *fname)
 #ifdef VIRTUAL
     char        *p;
 #endif
-    string      tmp, tmp2;
+    string      tmp, tmp2, ascii;
     bam_s       bam;
 
     // Open the D64 file
     f = opend64(fname, &bam);
 
     // Print HTML code
-    puts("Content-type: text/html\n");
+    puts("Content-type: text/html;charset=utf-8\n");
     puts("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
     puts("<html><head><title>");
     printf("Contents of %s\n", fname);
     puts("</title>");
     puts("<meta name=\"robots\" content=\"index,nofollow\">");
+    puts("<meta http-equiv=\"Content-Type\" content=\"text/html;"
+         "charset=utf-8\">\n");
     puts("</head>");
     puts("<body bgcolor=\"#ffffff\" link=\"#1e90ff\" vlink=\"#000080\">");
     printf("<h1 align=center>%s</h1>\n", fname);
@@ -316,7 +636,7 @@ void directory(const char *fname)
                        (int) dirblock.file[i].length[0] +
                        (int) dirblock.file[i].length[1] * 256);
 
-                tmp = petscii(dirblock.file[i].name, 16, true);
+                tmp = utf8petscii(dirblock.file[i].name, 16, true);
 
                 if (((ftype & 0xf) == 1 || (ftype & 0xf) == 2) &&
                     (ftype & 0x80) == 0x80)
@@ -325,25 +645,42 @@ void directory(const char *fname)
 
                     dirnr = sector * 8 + i;
 #ifdef VIRTUAL
-                    p = trim(tmp.c_str());
+                    ascii = petscii(dirblock.file[i].name, 16, true);
+                    p = trim(ascii.c_str());
                     printf("<a href=\"%d/r/%s.%c\">%s</a>"
                            "<td align=left>"
-                           "<a href=\"%d/%c/%s\">%s%s</a>\n",
+                           "<a href=\"%d/%c/%s\">%s%s</a>",
                            dirnr, p, tolower(filetypes[ftype & 0xf][0]),
                            tmp.c_str(),
                            dirnr, tolower(filetypes[ftype & 0xf][0]),
                            p, filetypes[ftype & 0xf],
                            ((ftype & 0xC0) == 0xC0 ? "<" : ""));
+                    if ((ftype & 0xf) == 1)
+                    {
+                        // Provide UTF-8 alternative for SEQ
+                        printf(" <a href=\"%d/u/%s\">\xE2\x92\xB0</a>",
+                               dirnr, p);
+                    }
+                    putchar('\n');
 #else
                     printf("<a href=\"" SELF "?path=%s&amp;action=extract"
                            "&amp;filenum=%d&amp;type=r\">%s</a>"
                            "<td align=left>"
                            "<a href=\"" SELF "?path=%s&amp;action=extract"
-                           "&amp;filenum=%d&amp;type=%c\">%s%s</a>\n",
+                           "&amp;filenum=%d&amp;type=%c\">%s%s</a>",
                            fname, dirnr, tmp.c_str(),
                            fname, dirnr, tolower(filetypes[ftype & 0xf][0]),
                            filetypes[ftype & 0xf],
                            ((ftype & 0xC0) == 0xC0 ? "<" : ""));
+                    if ((ftype & 0xf) == 1)
+                    {
+                        // Provide UTF-8 alternative for SEQ
+                        printf(" <a href="\"" SELF "?path=%s&amp;"
+                               "action=extract&amp;filenum=%d&amp;"
+                               "type=u\">\xE2\x92\xB0</a>",
+                               fname, dirnr);
+                    }
+                    putchar('\n');
 #endif
                 }
                 else
@@ -382,7 +719,9 @@ void directory(const char *fname)
 
     puts("</table>");
     puts("You can download files by their filenames, or see them "
-         "in your browser by their filetypes.");
+         "in your browser by their filetypes."
+         "Select the \xE2\x92\xB0 link to get a UTF-8 representation "
+         "of sequential (text) files.");
     puts("<hr noshade>");
 #ifdef VIRTUAL
     puts("<a href=\"../\">Return to the index</a>");
@@ -403,7 +742,7 @@ int ts2block(int track, int sector)
 }
 
 // Extract a file in any of three ways:
-// (r)aw, detokenize (p)rg or decode petscii (s)eq
+// (r)aw, detokenize (p)rg or decode petscii (s)eq/(u)tf8 seq
 void extract(const char *fname, int filenum, const char action)
 {
     FILE        *f, *out;
@@ -415,7 +754,7 @@ void extract(const char *fname, int filenum, const char action)
     int         blocks;
 
     // Check parameters for sanity
-    if (action != 'r' && action != 's' && action != 'p')
+    if (action != 'r' && action != 's' && action != 'p' && action != 'u')
     {
         disperror("I don't know how to extract that type");
     }
@@ -455,6 +794,10 @@ void extract(const char *fname, int filenum, const char action)
             puts("Content-type: text/plain\n");
             break;
 
+        case 'u':
+            puts("Content-type: text/plain;charset=utf-8\n");
+            break;
+
         case 'p':
             // Since bastext doesn't grok data on stdin, we need to
             // create a temporary file to hold the binary data, and
@@ -489,6 +832,12 @@ void extract(const char *fname, int filenum, const char action)
         {
             // Convert from PETSCII to ASCII
             tmp = petscii(&sector[2], t ? 254 : s, false);
+            fputs(tmp.c_str(), out);
+        }
+        else if ('u' == action)
+        {
+            // Convert from PETSCII to UTF-8
+            tmp = utf8petscii(&sector[2], t ? 254 : s, false);
             fputs(tmp.c_str(), out);
         }
         else
