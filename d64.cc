@@ -284,7 +284,9 @@ void directory(const char *fname)
     puts("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
     puts("<html><head><title>");
     printf("Contents of %s\n", fname);
-    puts("</title></head>");
+    puts("</title>");
+    puts("<meta name=\"robots\" content=\"index,nofollow\">");
+    puts("</head>");
     puts("<body bgcolor=\"#ffffff\" link=\"#1e90ff\" vlink=\"#000080\">");
     printf("<h1 align=center>%s</h1>\n", fname);
     puts("<table align=center border=0>");
