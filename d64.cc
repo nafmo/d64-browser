@@ -24,7 +24,7 @@
 #pragma pack(1)
 
 // Adapt these defines to fit your system
-#define BASTEXT "/home/peter/src/bastext/bastext -ia %s"
+#define BASTEXT "/home/peter/bin/bastext -ia %s"
 #define TMPNAME "/tmp/d64-XXXXXX"
 
 // Structure for BAM (18,0)
@@ -150,10 +150,11 @@ int query(const char *param, char *dest, int n)
     p = strtok(p, "&");
     while (p && strncmp(p, srch, len))
     {
-        p = strtok(p, NULL);
+        p = strtok(NULL, "&");
     }
 
     // Save to destination if found
+    p += len - 1;
     rc = 0;
     if (p)
     {
@@ -194,7 +195,7 @@ int query(const char *param, char *dest, int n)
 // Display error message
 void disperror(const char *text)
 {
-    puts("Content-Type: text/html\n\n");
+    puts("Content-Type: text/html\n");
     puts("<html><head><title>Error</title></head><body>");
     puts(text);
     puts("</body></html>");
@@ -386,7 +387,7 @@ void extract(const char *fname, int filenum, const char action)
             break;
 
         case 's':
-            puts("Content-type: text/plain");
+            puts("Content-type: text/plain\n");
             break;
 
         case 'p':
@@ -399,7 +400,7 @@ void extract(const char *fname, int filenum, const char action)
                 disperror("Unable to create temporary file");
             }
             out = fdopen(fh, "w");
-            puts("Content-type: text/plain");
+            puts("Content-type: text/plain\n");
             break;
     }
 
@@ -411,8 +412,8 @@ void extract(const char *fname, int filenum, const char action)
         fread(sector, 1, 256, f);
 
         // Read links
-        t = sector[0];
-        s = sector[1];
+        t = (unsigned char) sector[0];
+        s = (unsigned char) sector[1];
 
         if ('s' == action)
         {
