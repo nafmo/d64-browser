@@ -843,7 +843,7 @@ void extract(const char *fname, int filenum, const char action)
         else
         {
             // Just output it as raw data
-            fwrite(&sector[2], 1, t ? 254 : (s - 2), out);
+            fwrite(&sector[2], 1, t ? 254 : s, out);
         }
 
         // Check for error conditions
