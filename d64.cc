@@ -24,8 +24,9 @@
 #pragma pack(1)
 
 // Adapt these defines to fit your system
-#define BASTEXT "/home/peter/bin/bastext -ia %s"
+#define BASTEXT "/home/peter/bin/bastext -ia %s 2> /dev/null"
 #define TMPNAME "/tmp/d64-XXXXXX"
+#define MAXSIZE 664
 
 // Structure for BAM (18,0)
 struct bam_s
@@ -244,6 +245,7 @@ void directory(const char *fname)
     printf("Contents of %s\n", fname);
     puts("</title></head>");
     puts("<body bgcolor=\"#ffffff\" link=\"#1e90ff\" vlink=\"#000080\">");
+    printf("<h1 align=center>%s</h1>\n", fname);
     puts("<table align=center border=0>");
     tmp = petscii(bam.diskname, 16, true);
     tmp2= petscii(bam.id,       5,  true);
@@ -324,6 +326,10 @@ void directory(const char *fname)
     fclose(f);
 
     puts("</table>");
+    puts("You can download files by their filenames, or see them "
+         "in your browser by their filetypes.");
+    puts("<hr noshade>");
+    puts("<a href=\"./\">Return to the index</a>");
     puts("</body></html>");
 }
 
@@ -347,6 +353,7 @@ void extract(const char *fname, int filenum, const char action)
     int         fh, t, s;
     dirent_s    dirent;
     string      tmp;
+    int         blocks;
 
     // Check parameters for sanity
     if (action != 'r' && action != 's' && action != 'p')
@@ -399,13 +406,18 @@ void extract(const char *fname, int filenum, const char action)
             {
                 disperror("Unable to create temporary file");
             }
+
+            // Reassing to a FILE*
             out = fdopen(fh, "w");
             puts("Content-type: text/plain\n");
             break;
     }
 
+    // Make sure loops don't kill us
+    blocks = MAXSIZE;
+
     // End of file marker is track == 0
-    while (t)
+    while (t && blocks)
     {
         // Read requested sector
         fseek(f, ts2block(t, s) * 256, SEEK_SET);
@@ -432,6 +444,8 @@ void extract(const char *fname, int filenum, const char action)
         {
             t = 0;
         }
+
+        blocks --;
     }
 
     // We're done with the D64 file
