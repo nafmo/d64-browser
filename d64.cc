@@ -831,19 +831,19 @@ void extract(const char *fname, int filenum, const char action)
         if ('s' == action)
         {
             // Convert from PETSCII to ASCII
-            tmp = petscii(&sector[2], t ? 254 : s, false);
+            tmp = petscii(&sector[2], t ? 254 : (s - 2), false);
             fputs(tmp.c_str(), out);
         }
         else if ('u' == action)
         {
             // Convert from PETSCII to UTF-8
-            tmp = utf8petscii(&sector[2], t ? 254 : s, false);
+            tmp = utf8petscii(&sector[2], t ? 254 : (s - 2), false);
             fputs(tmp.c_str(), out);
         }
         else
         {
             // Just output it as raw data
-            fwrite(&sector[2], 1, t ? 254 : s, out);
+            fwrite(&sector[2], 1, t ? 254 : (s - 2), out);
         }
 
         // Check for error conditions
