@@ -22,6 +22,8 @@
 #include <string>
 #include <wchar.h>
 
+using namespace std;
+
 #pragma pack(1)
 
 // Adapt these defines to fit your system ---------------------------------
