@@ -1,6 +1,6 @@
 // D64 browser
 //
-// Copyright (c) 1999 Peter Karlsson
+// Copyright (c) 1999-2009 Peter Krefting
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
