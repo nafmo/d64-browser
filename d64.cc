@@ -89,8 +89,9 @@ union dirblock_u
 };
 
 // Unicode PETSCII table
-wchar_t petsciiunicode[256] =
+uint32_t petsciiunicode[256] =
 {
+    // $00
     0xFFFD, // undefined in PETSCII-sv
     0xFFFD, // undefined in PETSCII-sv
     0xFFFD, // undefined in PETSCII-sv
@@ -107,6 +108,7 @@ wchar_t petsciiunicode[256] =
     0x000D, // CARRIAGE RETURN
     0x000E, // SHIFT OUT
     0xFFFD, // undefined in PETSCII-sv
+    // $10
     0xFFFD, // undefined in PETSCII-sv
     0xFFFD, // CURSOR DOWN (CUS)
     0xFFFD, // REVERSE VIDEO ON (CUS)
@@ -123,6 +125,7 @@ wchar_t petsciiunicode[256] =
     0xFFFD, // CURSOR RIGHT (CUS)
     0xFFFD, // GREEN COLOR SWITCH (CUS)
     0xFFFD, // BLUE COLOR SWITCH (CUS)
+    // $20
     0x0020, // SPACE
     0x0021, // EXCLAMATION MARK
     0x0022, // QUOTATION MARK
@@ -139,6 +142,7 @@ wchar_t petsciiunicode[256] =
     0x002D, // HYPHEN-MINUS
     0x002E, // FULL STOP
     0x002F, // SOLIDUS
+    // $30
     0x0030, // DIGIT ZERO
     0x0031, // DIGIT ONE
     0x0032, // DIGIT TWO
@@ -155,6 +159,7 @@ wchar_t petsciiunicode[256] =
     0x003D, // EQUALS SIGN
     0x003E, // GREATER-THAN SIGN
     0x003F, // QUESTION MARK
+    // $40
     0x0040, // COMMERCIAL AT
     0x0061, // LATIN SMALL LETTER A
     0x0062, // LATIN SMALL LETTER B
@@ -171,6 +176,7 @@ wchar_t petsciiunicode[256] =
     0x006D, // LATIN SMALL LETTER M
     0x006E, // LATIN SMALL LETTER N
     0x006F, // LATIN SMALL LETTER O
+    // $50
     0x0070, // LATIN SMALL LETTER P
     0x0071, // LATIN SMALL LETTER Q
     0x0072, // LATIN SMALL LETTER R
@@ -187,7 +193,8 @@ wchar_t petsciiunicode[256] =
     0x00E5, // LATIN SMALL LETTER A WITH RING ABOVE
     0x2191, // UPWARDS ARROW
     0x2190, // LEFTWARDS ARROW
-    0x2501, // BOX DRAWINGS LIGHT HORIZONTAL
+    // $60
+    0x2500, // BOX DRAWINGS LIGHT HORIZONTAL
     0x0041, // LATIN CAPITAL LETTER A
     0x0042, // LATIN CAPITAL LETTER B
     0x0043, // LATIN CAPITAL LETTER C
@@ -203,6 +210,7 @@ wchar_t petsciiunicode[256] =
     0x004D, // LATIN CAPITAL LETTER M
     0x004E, // LATIN CAPITAL LETTER N
     0x004F, // LATIN CAPITAL LETTER O
+    // $70
     0x0050, // LATIN CAPITAL LETTER P
     0x0051, // LATIN CAPITAL LETTER Q
     0x0052, // LATIN CAPITAL LETTER R
@@ -217,8 +225,9 @@ wchar_t petsciiunicode[256] =
     0x00C4, // LATIN CAPITAL LETTER A WITH DIAERESIS
     0x00D6, // LATIN CAPITAL LETTER O WITH DIAERESIS
     0x00C5, // LATIN CAPITAL LETTER A WITH RING ABOVE
-    0x2592, // MEDIUM SHADE
-    0x2592, // MEDIUM SHADE SLASHED (CUS) **
+    0x1FB96, // INVERSE CHECKER BOARD FILL (VIC-20: 0x1FB95 CHECKER BOARD FILL)
+    0x1FB98, // UPPER LEFT TO LOWER RIGHT FILL
+    // $80
     0xFFFD, // undefined in PETSCII-sv
     0xFFFD, // ORANGE COLOR SWITCH (CUS)
     0xFFFD, // undefined in PETSCII-sv
@@ -235,6 +244,7 @@ wchar_t petsciiunicode[256] =
     0x0020, // SPACE
     0x000F, // SHIFT IN
     0xFFFD, // undefined in PETSCII-sv
+    // $90
     0xFFFD, // BLACK COLOR SWITCH (CUS)
     0xFFFD, // CURSOR UP (CUS)
     0xFFFD, // REVERSE VIDEO OFF (CUS)
@@ -251,7 +261,8 @@ wchar_t petsciiunicode[256] =
     0xFFFD, // CURSOR LEFT (CUS)
     0xFFFD, // YELLOW COLOR SWITCH (CUS)
     0xFFFD, // CYAN COLOR SWITCH (CUS)
-    0x0020, // SPACE
+    // $A0
+    0x00A0, // NO-BREAK SPACE
     0x258C, // LEFT HALF BLOCK
     0x2584, // LOWER HALF BLOCK
     0x2594, // UPPER ONE EIGHTH BLOCK
@@ -259,31 +270,33 @@ wchar_t petsciiunicode[256] =
     0x258F, // LEFT ONE EIGHTH BLOCK
     0x2592, // MEDIUM SHADE
     0x2595, // RIGHT ONE EIGHTH BLOCK
-    0x2584, // LOWER HALF BLOCK MEDIUM SHADE (CUS) **
-    0x25E4, // BLACK UPPER LEFT TRIANGLE
-    0x2590, // RIGHT ONE QUARTER BLOCK (CUS) **
+    0x1FB8F, // LOWER HALF MEDIUM SHADE
+    0x1FB99, // UPPER RIGHT TO LOWER LEFT FILL
+    0x1FB87, // RIGHT ONE QUARTER BLOCK
     0x251C, // BOX DRAWINGS LIGHT VERTICAL AND RIGHT
-    0x00A0, // BLACK SMALL SQUARE LOWER RIGHT (CUS) **
+    0x2597, // QUADRANT LOWER RIGHT
     0x2514, // BOX DRAWINGS LIGHT UP AND RIGHT
     0x2510, // BOX DRAWINGS LIGHT DOWN AND LEFT
     0x2582, // LOWER ONE QUARTER BLOCK
+    // $B0
     0x250C, // BOX DRAWINGS LIGHT DOWN AND RIGHT
     0x2534, // BOX DRAWINGS LIGHT UP AND HORIZONTAL
     0x252C, // BOX DRAWINGS LIGHT DOWN AND HORIZONTAL
     0x2524, // BOX DRAWINGS LIGHT VERTICAL AND LEFT
     0x258E, // LEFT ONE QUARTER BLOCK
     0x258D, // LEFT THREE EIGTHS BLOCK
-    0x2590, // RIGHT THREE EIGHTHS BLOCK (CUS) **
-    0x2580, // UPPER ONE QUARTER BLOCK (CUS) **
-    0x2580, // UPPER THREE EIGHTS BLOCK (CUS) **
+    0x1FB88, // RIGHT THREE EIGHTHS BLOCK
+    0x1FB82, // UPPER ONE QUARTER BLOCK
+    0x1FB83, // UPPER THREE EIGHTS BLOCK
     0x2583, // LOWER THREE EIGHTHS BLOCK
     0x2713, // CHECK MARK
-    0x00A0, // BLACK SMALL SQUARE LOWER LEFT (CUS) **
-    0x00A0, // BLACK SMALL SQUARE UPPER RIGHT (CUS) **
+    0x2596, // QUADRANT LOWER LEFT
+    0x2F9D, // QUADRANT UPPER RIGHT
     0x2518, // BOX DRAWINGS LIGHT UP AND LEFT
-    0x00A0, // BLACK SMALL SQUARE UPPER LEFT (CUS) **
-    0x00A0, // TWO SMALL BLACK SQUARES DIAGONAL LEFT TO RIGHT (CUS) **
-    0x2501, // BOX DRAWINGS LIGHT HORIZONTAL
+    0x2598, // QUADRANT UPPER LEFT
+    0x259A, // QUADRANT UPPER LEFT AND LOWER RIGHT
+    // $C0
+    0x2500, // BOX DRAWINGS LIGHT HORIZONTAL
     0x0041, // LATIN CAPITAL LETTER A
     0x0042, // LATIN CAPITAL LETTER B
     0x0043, // LATIN CAPITAL LETTER C
@@ -299,6 +312,7 @@ wchar_t petsciiunicode[256] =
     0x004D, // LATIN CAPITAL LETTER M
     0x004E, // LATIN CAPITAL LETTER N
     0x004F, // LATIN CAPITAL LETTER O
+    // $D0
     0x0050, // LATIN CAPITAL LETTER P
     0x0051, // LATIN CAPITAL LETTER Q
     0x0052, // LATIN CAPITAL LETTER R
@@ -313,9 +327,10 @@ wchar_t petsciiunicode[256] =
     0x00C4, // LATIN CAPITAL LETTER A WITH DIAERESIS
     0x00D6, // LATIN CAPITAL LETTER O WITH DIAERESIS
     0x00C5, // LATIN CAPITAL LETTER A WITH RING ABOVE
-    0x2592, // MEDIUM SHADE
-    0x2592, // MEDIUM SHADE SLASHED (CUS) **
-    0x0020, // SPACE
+    0x1FB96, // INVERSE CHECKER BOARD FILL (VIC-20: 0x1FB95 CHECKER BOARD FILL)
+    0x1FB98, // UPPER LEFT TO LOWER RIGHT FILL
+    // $E0
+    0x00A0, // NO-BREAK SPACE
     0x258C, // LEFT HALF BLOCK
     0x2584, // LOWER HALF BLOCK
     0x2594, // UPPER ONE EIGHTH BLOCK
@@ -323,30 +338,31 @@ wchar_t petsciiunicode[256] =
     0x258F, // LEFT ONE EIGHTH BLOCK
     0x2592, // MEDIUM SHADE
     0x2595, // RIGHT ONE EIGHTH BLOCK
-    0x2584, // LOWER HALF BLOCK MEDIUM SHADE (CUS) **
-    0x25E4, // BLACK UPPER LEFT TRIANGLE
-    0x2590, // RIGHT ONE QUARTER BLOCK (CUS) **
+    0x1FB8F, // LOWER HALF MEDIUM SHADE
+    0x1FB99, // UPPER RIGHT TO LOWER LEFT FILL
+    0x1FB87, // RIGHT ONE QUARTER BLOCK
     0x251C, // BOX DRAWINGS LIGHT VERTICAL AND RIGHT
-    0x00A0, // BLACK SMALL SQUARE LOWER RIGHT (CUS) **
+    0x2597, // QUADRANT LOWER RIGHT
     0x2514, // BOX DRAWINGS LIGHT UP AND RIGHT
     0x2510, // BOX DRAWINGS LIGHT DOWN AND LEFT
     0x2582, // LOWER ONE QUARTER BLOCK
+    // $F0
     0x250C, // BOX DRAWINGS LIGHT DOWN AND RIGHT
     0x2534, // BOX DRAWINGS LIGHT UP AND HORIZONTAL
     0x252C, // BOX DRAWINGS LIGHT DOWN AND HORIZONTAL
     0x2524, // BOX DRAWINGS LIGHT VERTICAL AND LEFT
     0x258E, // LEFT ONE QUARTER BLOCK
     0x258D, // LEFT THREE EIGTHS BLOCK
-    0x2590, // RIGHT THREE EIGHTHS BLOCK (CUS) **
-    0x2580, // UPPER ONE QUARTER BLOCK (CUS) **
-    0x2580, // UPPER THREE EIGHTS BLOCK (CUS) **
+    0x1FB88, // RIGHT THREE EIGHTHS BLOCK
+    0x1FB82, // UPPER ONE QUARTER BLOCK
+    0x1FB83, // UPPER THREE EIGHTS BLOCK
     0x2583, // LOWER THREE EIGHTHS BLOCK
     0x2713, // CHECK MARK
-    0x00A0, // BLACK SMALL SQUARE LOWER LEFT (CUS)
-    0x00A0, // BLACK SMALL SQUARE UPPER RIGHT (CUS)
+    0x2596, // QUADRANT LOWER LEFT
+    0x2F9D, // QUADRANT UPPER RIGHT
     0x2518, // BOX DRAWINGS LIGHT UP AND LEFT
-    0x00A0, // BLACK SMALL SQUARE UPPER LEFT (CUS)
-    0x2592  // MEDIUM SHADE
+    0x2598, // QUADRANT UPPER LEFT
+    0x1FB96, // INVERSE CHECKER BOARD FILL (VIC-20: 0x1FB95 CHECKER BOARD FILL)
 };
 
 // Convert a string from Swedish PETSCII to UTF-8
@@ -357,7 +373,7 @@ string utf8petscii(char *input, int n, bool esc)
 
     while (*p && n)
     {
-        wchar_t ch = petsciiunicode[*p];
+        uint32_t ch = petsciiunicode[*p];
         if (ch <= 0x7F)
         {
             if (esc)
@@ -397,6 +413,13 @@ string utf8petscii(char *input, int n, bool esc)
             o += char(0x80 | ((ch >>  6) & 0x3F));
             o += char(0x80 | ( ch        & 0x3F));
         }
+        else
+        {
+            o += char(0xF0 | ((ch >> 18) & 0x0F));
+            o += char(0x80 | ((ch >> 12) & 0x0F));
+            o += char(0x80 | ((ch >>  6) & 0x3F));
+            o += char(0x80 | ( ch        & 0x3F));
+        }
 
         n --;
         p ++;
@@ -405,7 +428,7 @@ string utf8petscii(char *input, int n, bool esc)
     return o;
 }
 
-// Convert a string from Swedish PETSCII to a rudimentry ASCII representation
+// Convert a string from Swedish PETSCII to a rudimentry Latin-1 representation
 // (kills most special characters and always uses mixed case)
 string petscii(char *input, int n, bool esc)
 {
