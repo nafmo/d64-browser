@@ -700,7 +700,7 @@ void directory(const char *fname)
                     if ((ftype & 0xf) == 1)
                     {
                         // Provide UTF-8 alternative for SEQ
-                        printf(" <a href="\"" SELF "?path=%s&amp;"
+                        printf(" <a href=\"" SELF "?path=%s&amp;"
                                "action=extract&amp;filenum=%d&amp;"
                                "type=u\">(utf-8)</a>",
                                fname, dirnr);
